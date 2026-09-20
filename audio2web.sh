@@ -30,7 +30,7 @@ snippets=()
 
 # No `codec_string()` helper here, unlike `video2web.sh`.
 # `AV1` needed one because its profile, level and bit depth vary per file and have to be read back with `ffprobe`.
-# Audio has no such variance: `Opus` has no profile or level variants at all, and `FFmpeg`'s native `AAC` encoder only ever produces `AAC-LC`.
+# Audio has no such variance: `Opus` has no profile or level variants at all, and `FFmpeg`’s native `AAC` encoder only ever produces `AAC-LC`.
 # Both codec strings are therefore static and can be hardcoded into the markup below.
 
 # Reports whether the file carries at least one audio stream.
@@ -49,8 +49,8 @@ process() {
 
 	# Video inputs get an extra `.audio-only` infix, audio inputs do not.
 	# Reason: `video2web.sh` accepts the same four video extensions and writes `out/clip.mp4.webm` for the very same source.
-	# Without the infix both scripts would target that one path, and since both skip on an existing output, one would silently leave the other's file in place – a video WebM where an audio-only one was expected, with nothing in the log to show for it.
-	# `${f:e}` is `zsh`'s extension modifier, the surrounding `${…:l}` lowercases it, so `.MOV` matches too (`NO_CASE_GLOB` lets those into the loop).
+	# Without the infix both scripts would target that one path, and since both skip on an existing output, one would silently leave the other’s file in place – a video WebM where an audio-only one was expected, with nothing in the log to show for it.
+	# `${f:e}` is `zsh`’s extension modifier, the surrounding `${…:l}` lowercases it, so `.MOV` matches too (`NO_CASE_GLOB` lets those into the loop).
 	case "${${f:e}:l}" in
 		mp4|mov|m4v|mkv) suffix=".audio-only" ;;
 	esac
@@ -120,7 +120,7 @@ process() {
 	fi
 
 	# === Fallback tier: M4A/AAC ===
-	#   -c:a aac               `FFmpeg`'s native `AAC` encoder, which produces `AAC-LC` – the one audio codec that plays everywhere inside `MP4`.
+	#   -c:a aac               `FFmpeg`’s native `AAC` encoder, which produces `AAC-LC` – the one audio codec that plays everywhere inside `MP4`.
 	#                          `libfdk_aac` would encode slightly better but is not in Homebrew builds, because its license is incompatible with distributing `FFmpeg` binaries.
 	#                          `MP3` was ruled out: it is equally universal but measurably worse per bitrate, and nothing on the web still requires it.
 	#   -b:a 128k              Roughly matches `Opus` at 96k in perceived quality – the same efficiency gap that puts `CRF` 40 against 27 on the video side.

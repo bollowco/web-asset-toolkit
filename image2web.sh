@@ -6,8 +6,8 @@
 # - `zsh scripts/image2web.sh [max_dimension]`
 #
 ## Examples
-# - `zsh scripts/image2web.sh` -> encoding only, no resize
-# - `zsh scripts/image2web.sh 3840` -> resize to max 3840 px + encoding
+# - `zsh scripts/image2web.sh`        -> encoding only, no resize
+# - `zsh scripts/image2web.sh 3840`   -> resize to max 3840 px + encoding
 #
 ## Location
 # - Images: `~/Documents/Terminal`

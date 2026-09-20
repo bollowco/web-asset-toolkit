@@ -150,7 +150,7 @@ process() {
 	#   -x264-params ref=4     Caps reference frames at 4 (`veryslow` defaults to 16).
 	#                          This is NOT a compression setting: the reference frame count drives the Decoded Picture Buffer size, which dictates the `H.264` level `x264` has to declare in the header.
 	#                          At 4K, `ref=16` needs ~518k macroblocks of DPB, which only level 6.0 allows – and level 6.x was added for 8K in 2016 and is implemented in almost no hardware decoder.
-	#                          Result: Apple's VideoToolbox refuses the stream, playback falls back to software, 4K `H.264` stutters, frames get dropped, and audio drifts out of sync because it keeps running on its own clock.
+	#                          Result: Apple’s VideoToolbox refuses the stream, playback falls back to software, 4K `H.264` stutters, frames get dropped, and audio drifts out of sync because it keeps running on its own clock.
 	#                          `ref=4` keeps the DPB inside level 5.1 at 4K and level 4.0 at 1080p – both universally supported, and derived automatically per resolution, so no hardcoded `-level:v` is needed.
 	#   -c:a aac -b:a 96k      The only audio codec that works everywhere inside MP4.
 	#   -movflags +faststart   Moves the `moov` atom to the front so playback starts before the full file is downloaded, which is mandatory for web.
