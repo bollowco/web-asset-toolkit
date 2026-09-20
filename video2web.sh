@@ -128,7 +128,8 @@ process() {
 		-g 240 \
 		-c:a libopus \
 		-b:a 96k \
-		-map_metadata -1 -map_chapters -1 \
+		-map_metadata -1 \
+		-map_chapters -1 \
 		-cues_to_front 1 \
 		"$webm_out"
 	then
@@ -162,7 +163,8 @@ process() {
 		-g 240 \
 		-c:a aac \
 		-b:a 96k \
-		-map_metadata -1 -map_chapters -1 \
+		-map_metadata -1 \
+		-map_chapters -1 \
 		-movflags +faststart \
 		"$mp4_out"
 	then
@@ -187,7 +189,7 @@ process() {
 }
 
 # One loop, one setting: unlike images, the input extension says nothing about the content, since a `.mov` and an `.mp4` can hold bit-identical `H.264`.
-# `.avi` is left out as dead legacy, and `.webm` deliberately so – it is a delivery format, and re-encoding it would only stack generation loss.
+# `.webm` is deliberately left out – it is a delivery format, and re-encoding it would only stack generation loss.
 for f in *.mp4 *.mov *.m4v *.mkv; do
 	# Guard against edge cases where the glob yields a non-file.
 	[[ -f "$f" ]] || continue
