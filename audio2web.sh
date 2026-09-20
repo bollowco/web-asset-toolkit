@@ -18,6 +18,12 @@ setopt NULL_GLOB
 # Case-insensitive globbing, so `*.wav` also matches `.WAV/.MP3` etc.
 setopt NO_CASE_GLOB
 
+# Dependency check:
+command -v ffmpeg >/dev/null || {
+	echo "Error: \`ffmpeg\` not found. Install with \`brew install ffmpeg\`." >&2
+	exit 1
+}
+
 mkdir -p out
 
 # Counters for the end-of-run summary.

@@ -26,6 +26,12 @@ setopt NULL_GLOB
 # Case-insensitive globbing, so `*.ttf` also matches `.TTF/.OTF` etc.
 setopt NO_CASE_GLOB
 
+# Dependency check:
+command -v fonttools >/dev/null || {
+	echo "Error: \`fonttools\` not found. Install with \`brew install fonttools\`." >&2
+	exit 1
+}
+
 # === Positional args ===
 # `$1`: Unicode scope. Empty or `latin` uses the preset below, `full` keeps every glyph, anything starting with `U+` is taken as a literal range list.
 # `$2`: Variable-font axis spec, handed straight to the instancer. A value WITH a colon (`wght=300:700`) narrows the range and keeps the font variable; one WITHOUT (`wght=400`) pins it to a static instance. Multiple axes are comma-separated. Empty leaves variable fonts fully intact.

@@ -14,13 +14,24 @@
 # - Script: `~/Documents/Terminal/scripts`
 #
 ## Dependencies
-# - `libavif` (Homebrew)
 # - `sips` (macOS)
+# - `libavif` (Homebrew)
 
 # A glob matching nothing expands to nothing (not to the literal `*.jpg`).
 setopt NULL_GLOB
 # Case-insensitive globbing, so `*.jpg` also matches `.JPG/.JPEG` etc.
 setopt NO_CASE_GLOB
+
+# Dependency check:
+command -v sips >/dev/null || {
+	echo "Error: \`sips\` not found. This script requires macOS." >&2
+	exit 1
+}
+
+command -v libavif >/dev/null || {
+	echo "Error: \`libavif\` not found. Install with \`brew install libavif\`." >&2
+	exit 1
+}
 
 # Optional first arg: max edge length in px. Empty = no resizing.
 MAX_DIM="$1"
