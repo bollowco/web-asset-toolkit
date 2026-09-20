@@ -86,7 +86,7 @@ process() {
 	#   -loglevel error    Only real errors; progress is printed by the script itself.
 	#   -n                 Never overwrite (race safety net; the actual skip is handled above).
 	#   -map 0:v:0         Exactly the first video stream – ignores embedded cover art carried as a second "video" stream.
-	#   -map "0:a?"        Audio IF present; the `?` keeps silent clips from aborting the run.
+	#   -map "0:a:0?"      Exactly the first audio stream, and only if one exists.
 	#                      MUST stay quoted: `?` is a `zsh` glob, and with `NULL_GLOB` an unquoted `0:a?` silently expands to nothing, after which `ffmpeg` eats the next flag as the `-map` value.
 	#                      For permanently muted hero videos, swap in `-an` to drop the stream entirely.
 	#   -g 240             Keyframe roughly every 8 – 10 s. Scene detection stays ON, so hard cuts still get their own keyframe – disabling it (`-sc_threshold 0`) is what causes seconds of block artifacts after a cut.
@@ -119,7 +119,7 @@ process() {
 		-loglevel error \
 		-n \
 		-i "$f" \
-		-map 0:v:0 -map "0:a?" \
+		-map 0:v:0 -map "0:a:0?" \
 		-c:v libsvtav1 \
 		-crf 40 \
 		-preset 4 \
@@ -147,6 +147,11 @@ process() {
 	#   -pix_fmt yuv420p       `H.264` stays 8-bit: 10-bit would mean High10 profile, where browser support collapses.
 	#                          This is also why the MP4 bands slightly more than the WebM in flat areas, and no `CRF` value can close that gap.
 	#                          No `-level:v` is set: x264 derives the minimum level the stream actually needs, which stays correct for 4K input where a hardcoded `4.1` would not.
+	#   -x264-params ref=4     Caps reference frames at 4 (`veryslow` defaults to 16).
+	#                          This is NOT a compression setting: the reference frame count drives the Decoded Picture Buffer size, which dictates the `H.264` level `x264` has to declare in the header.
+	#                          At 4K, `ref=16` needs ~518k macroblocks of DPB, which only level 6.0 allows – and level 6.x was added for 8K in 2016 and is implemented in almost no hardware decoder.
+	#                          Result: Apple's VideoToolbox refuses the stream, playback falls back to software, 4K `H.264` stutters, frames get dropped, and audio drifts out of sync because it keeps running on its own clock.
+	#                          `ref=4` keeps the DPB inside level 5.1 at 4K and level 4.0 at 1080p – both universally supported, and derived automatically per resolution, so no hardcoded `-level:v` is needed.
 	#   -c:a aac -b:a 96k      The only audio codec that works everywhere inside MP4.
 	#   -movflags +faststart   Moves the `moov` atom to the front so playback starts before the full file is downloaded, which is mandatory for web.
 
@@ -158,12 +163,13 @@ process() {
 		-loglevel error \
 		-n \
 		-i "$f" \
-		-map 0:v:0 -map "0:a?" \
+		-map 0:v:0 -map "0:a:0?" \
 		-c:v libx264 \
 		-crf 27 \
 		-preset veryslow \
 		-profile:v high \
 		-pix_fmt yuv420p \
+		-x264-params ref=4 \
 		-g 240 \
 		-c:a aac \
 		-b:a 96k \
