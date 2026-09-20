@@ -152,7 +152,11 @@ process() {
 
 	if [[ -e "$mp4_out" ]]; then
 		(( ++skipped_count ))
-	elif ffmpeg -nostdin -hide_banner -loglevel error -n \
+	elif ffmpeg \
+		-nostdin \
+		-hide_banner \
+		-loglevel error \
+		-n \
 		-i "$f" \
 		-map 0:v:0 -map "0:a?" \
 		-c:v libx264 \
