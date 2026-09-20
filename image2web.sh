@@ -1,5 +1,5 @@
 ## Purpose
-# - Converts all JPG/PNG images in the current directory to AVIF (libavif/aom, tuned for minimum file size).
+# - Converts all JPG/PNG images in the current directory to AVIF (`libavif/aom`, tuned for minimum file size).
 # - Optionally downscales images to a max edge length beforehand (never upscales).
 #
 ## Usage
@@ -88,6 +88,7 @@ resize_if_needed() {
 # Args: filename, `yuv` format, color quality, alpha quality ("" = none, JPG case).
 process() {
 	local f="$1" yuv="$2" q="$3" qalpha="$4"
+	# The extension is APPENDED, not replaced, so `image.jpg` becomes `image.jpg.avif` to avoid conflicts when files with different extensions have the same name.
 	local out="out/${f}.avif"
 	local src="$f"
 
