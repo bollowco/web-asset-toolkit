@@ -20,6 +20,7 @@ setopt NULL_GLOB
 setopt NO_CASE_GLOB
 
 # Dependency check:
+
 command -v exiftool >/dev/null || {
 	echo "Error: \`exiftool\` not found. Install with \`brew install exiftool\`." >&2
 	exit 1

@@ -18,6 +18,7 @@ setopt NULL_GLOB
 setopt NO_CASE_GLOB
 
 # Dependency check:
+
 command -v ffmpeg >/dev/null || {
 	echo "Error: \`ffmpeg\` not found. Install with \`brew install ffmpeg\`." >&2
 	exit 1

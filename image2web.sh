@@ -23,13 +23,14 @@ setopt NULL_GLOB
 setopt NO_CASE_GLOB
 
 # Dependency check:
+
 command -v sips >/dev/null || {
 	echo "Error: \`sips\` not found. This script requires macOS." >&2
 	exit 1
 }
 
-command -v libavif >/dev/null || {
-	echo "Error: \`libavif\` not found. Install with \`brew install libavif\`." >&2
+command -v avifenc >/dev/null || {
+	echo "Error: \`avifenc\` not found. Install with \`brew install libavif\`." >&2
 	exit 1
 }
 

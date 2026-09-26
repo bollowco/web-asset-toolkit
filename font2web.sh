@@ -27,8 +27,9 @@ setopt NULL_GLOB
 setopt NO_CASE_GLOB
 
 # Dependency check:
-command -v fonttools >/dev/null || {
-	echo "Error: \`fonttools\` not found. Install with \`brew install fonttools\`." >&2
+
+command -v pyftsubset >/dev/null || {
+	echo "Error: \`pyftsubset\` not found. Install with \`brew install fonttools\`." >&2
 	exit 1
 }
 
