@@ -4,11 +4,11 @@
 # - Output is linearized ("Fast Web View"), so a browser renders the first page before the file has finished downloading.
 #
 ## Usage
-# - `zsh scripts/pdf2web.sh`
+# - `zsh ~/Developer/scripts/web_assets/pdf2web.sh`
 #
-## Location
-# - PDFs:   `~/Documents/Terminal`
-# - Script: `~/Documents/Terminal/scripts`
+## Recommended location
+# - PDFs:   `~/Developer/terminal`
+# - Script: `~/Developer/scripts`
 #
 ## Dependencies
 # - `ExifTool` (Homebrew)
