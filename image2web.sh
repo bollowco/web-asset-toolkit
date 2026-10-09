@@ -3,15 +3,15 @@
 # - Optionally downscales images to a max edge length beforehand (never upscales).
 #
 ## Usage
-# - `zsh scripts/image2web.sh [max_dimension]`
+# - `zsh ~/Developer/scripts/web_assets/image2web.sh [max_dimension]`
 #
 ## Examples
 # - `zsh scripts/image2web.sh`        -> encoding only, no resize
 # - `zsh scripts/image2web.sh 3840`   -> resize to max 3840 px + encoding
 #
-## Location
-# - Images: `~/Documents/Terminal`
-# - Script: `~/Documents/Terminal/scripts`
+## Recommended location
+# - Images: `~/Developer/terminal`
+# - Script: `~/Developer/scripts`
 #
 ## Dependencies
 # - `sips` (macOS)
