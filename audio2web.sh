@@ -4,11 +4,11 @@
 # - Prints ready-to-paste `<source>` markup for the `<audio>` element.
 #
 ## Usage
-# - `zsh scripts/audio2web.sh`
+# - `zsh ~/Developer/scripts/web_assets/audio2web.sh`
 #
-## Location
-# - Audio: `~/Documents/Terminal`
-# - Script: `~/Documents/Terminal/scripts`
+## Recommended location
+# - Audio: `~/Developer/terminal`
+# - Script: `~/Developer/scripts`
 #
 ## Dependencies
 # - `FFmpeg` (Homebrew)
