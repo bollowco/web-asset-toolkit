@@ -5,7 +5,7 @@
 # - Prints ready-to-paste `@font-face` markup with the family name and weight range read back from the finished file.
 #
 ## Usage
-# - `zsh scripts/font2web.sh [unicode] [axis_spec]`
+# - `zsh ~/Developer/scripts/web_assets/font2web.sh [unicode] [axis_spec]`
 #
 ## Examples
 # - `zsh scripts/font2web.sh`                             -> Latin/Europe subset, variable fonts left intact
@@ -14,9 +14,9 @@
 # - `zsh scripts/font2web.sh latin wght=300:700`          -> Latin subset, still variable but only weight 300 – 700
 # - `zsh scripts/font2web.sh "U+0020-007E,U+00C0-00FF"`   -> custom unicode ranges
 #
-## Location
-# - Fonts:  `~/Documents/Terminal`
-# - Script: `~/Documents/Terminal/scripts`
+## Recommended location
+# - Fonts:  `~/Developer/terminal`
+# - Script: `~/Developer/scripts`
 #
 ## Dependencies
 # - `fonttools` (Homebrew)
