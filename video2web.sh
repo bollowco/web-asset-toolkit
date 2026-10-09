@@ -3,11 +3,11 @@
 # - Prints ready-to-paste `<source>` markup including the correct `AV1` codec string per file.
 #
 ## Usage
-# - `zsh scripts/video2web.sh`
+# - `zsh ~/Developer/scripts/web_assets/video2web.sh`
 #
-## Location
-# - Videos: `~/Documents/Terminal`
-# - Script: `~/Documents/Terminal/scripts`
+## Recommended location
+# - Videos: `~/Developer/terminal`
+# - Script: `~/Developer/scripts`
 #
 ## Dependencies
 # - `FFmpeg` (Homebrew)
